@@ -61,7 +61,14 @@ def main():
     try:
         # 使用封装好的 run_task 方法：创建并等待完成
         logging.info(f"Submitting task to {base_url}...")
-        result = client.run_task("example_calculate_skill", parameters, poll_interval=2.0, timeout=60.0)
+        result = client.run_task(
+            task_name="example_calculate", 
+            app_name="example_calculate_skill",
+            app_version=SKILL_VERSION,
+            parameters=parameters, 
+            poll_interval=2.0, 
+            timeout=60.0
+        )
         
         if result.get("code") != 1:
             logging.error(f"Error: {result.get('message')}")
